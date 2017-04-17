@@ -89,13 +89,13 @@ public class NotificationListener extends NotificationListenerService {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(!intent.getStringExtra("command").isEmpty()){
+            if(intent.getStringExtra("command").contains("Collection")){
                 if(intent.getStringExtra("command").equals("StartCollection")){
                     captureSwitch = true;
                 }else if(intent.getStringExtra("command").equals("StopCollection")){
                     captureSwitch = false;
                 }
-            }else if(!intent.getStringExtra("appname").isEmpty()){
+            }else if(!intent.getStringExtra("command").equals("AppUpdate")){
                 APPNAME = intent.getStringExtra("appname");
                 PACKAGENAME = intent.getStringExtra("packagename");
             }

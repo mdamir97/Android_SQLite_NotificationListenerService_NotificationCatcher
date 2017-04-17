@@ -215,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void sendAppName() {
         Intent i = new Intent("com.example.werfish.NOTIFICATION_LISTENER_COMMANDER");
+        i.putExtra("command", "AppUpdate");
         i.putExtra("appname", APPNAME);
         i.putExtra("packagename", PACKAGENAME);
         sendBroadcast(i);
