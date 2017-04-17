@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         //All the status checks and setting textviews and switch on the main activity
         setState(checkServiceState(NotificationListener.class));
         serviceSwitch.setChecked(false);
+        setAll();
 
         //Check if the setting for reading notifications by the app is enabled
         //if it is not enables then guide the user to it
@@ -118,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                     //stop the notification collection
                     ListenerCommander("StopCollection");
                     appChooser.setEnabled(true);
-
                 }
             }
         });
@@ -197,11 +197,9 @@ public class MainActivity extends AppCompatActivity {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
         for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
-                appChooser.setEnabled(false);
                 return true;
             }
         }
-        appChooser.setEnabled(true);
         return false;
     }
 
@@ -237,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void notificationsAccessDialog(Boolean isSet) {
-        if (!isSet) {
+        if (isSet == false) {
             AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(MainActivity.this);
             myAlertDialog.setTitle("Enable Notifications Access!");
             myAlertDialog.setMessage("The notification access is not enabled for this app. The notification capture will not work/n" +
@@ -269,6 +267,12 @@ public class MainActivity extends AppCompatActivity {
             //notifications access is not enabled return false
             return false;
         }
+    }
+
+    public void onResume() {
+        super.onResume();
+
+        setState(checkServiceState(NotificationListener.class));
     }
 
     @Override
