@@ -28,6 +28,8 @@ public class CatcherService extends Service {
         //getNotificationTitle and put it to title_string
         //db.insertNotification(title_string,content_string,)
 
+        //TEST COMMIT COMMENT
+
         return START_STICKY;
     }
 
