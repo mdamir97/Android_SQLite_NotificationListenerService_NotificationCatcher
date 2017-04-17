@@ -84,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         notificationsAccessDialog(isNotificationsAccessChecked());
 
         Button btnNotifications = (Button) findViewById(R.id.Notification_Button);
-        db.destroy();
 
         //Insert test records to see if everything is working
         if (db.numberOfRows() == 0) {
@@ -237,8 +236,8 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this, error, Toast.LENGTH_SHORT).show();
     }
 
-    private void notificationsAccessDialog(Boolean isNotSet) {
-        if (isNotSet) {
+    private void notificationsAccessDialog(Boolean isSet) {
+        if (!isSet) {
             AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(MainActivity.this);
             myAlertDialog.setTitle("Enable Notifications Access!");
             myAlertDialog.setMessage("The notification access is not enabled for this app. The notification capture will not work/n" +
